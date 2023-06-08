@@ -5,12 +5,13 @@
 
 
 # Iniciar projeto
-`git clone https://github.com/joao-pedro01/Trabalho-Mobile-I`<br>
-`cd Trabalho-Mobile-I`<br>
+`git clone https://github.com/joao-pedro01/Project-Ract-Native`<br>
+`cd Project-React-Native`<br>
 npm para instalar todas dependencias: `npm install`<br>
 
 
 ## Configurar .env
+## Usar .env.example
 
 Na raiz do projeto crie um arquivo .env com a chave da api do google, siga o .env.example, só mudar os valores
 
