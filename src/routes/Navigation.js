@@ -10,6 +10,14 @@ function AppStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen
+                name="Login"
+                options={{ headerShown: false }}
+                component={Login} />
+            <Stack.Screen
+                name="ListarUsuarios"
+                options={{ headerShown: false }}
+                component={ListarUsuarios} />
+            <Stack.Screen
                 name="Cadastro"
                 options={{ headerShown: false }}
                 component={Cadastro} />
@@ -17,14 +25,6 @@ function AppStack() {
                 name="InfoUsuario"
                 options={{ headerShown: false }}
                 component={InfoUsuario} />
-            <Stack.Screen
-                name="ListarUsuarios"
-                options={{ headerShown: false }}
-                component={ListarUsuarios} />
-            <Stack.Screen
-                name="Login"
-                options={{ headerShown: false }}
-                component={Login} />
             {/* <Stack.Screen 
                 name="Home" 
                 component={Home} 

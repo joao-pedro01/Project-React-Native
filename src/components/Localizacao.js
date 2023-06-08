@@ -4,57 +4,37 @@ import * as Location from 'expo-location';
 import getCepApi from '../services/serviceGoogle';
 import getEndereco from "../services/serviceViaCep";
 
-const obterLocalizacao = async () => {
-  const [endereco, setEndereco] = useState(null);
-  const [cep, setCep] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+export const buscarCep = async (latitude, longitude, status) => {
+  try {
+    const cep = await getCepApi(latitude, longitude);
+    const endereco = await buscarEndereco(cep);
+    /* console.log(cep) */
+    if(status) {
+      return {endereco, cep};
+    }
+    return {endereco};
+  } catch (error) {
+    console.log("Erro ao buscar CEP:", error);
+  }
+};
+const buscarEndereco = async (cep) => {
+  try {
+    const endereco = await getEndereco(cep);
 
-  useEffect(() => {
-    const getLocationAsync = async () => {
-      try {
-        const { granted } = await Location.requestForegroundPermissionsAsync();
+    return endereco;
+  } catch (error) {
+    console.log("Erro ao buscar endereço:", error);
+  }
+};
+/* const obterLocalizacao = async (latitude, longitude) => {
 
-        if (granted) {
-          const location = await Location.getCurrentPositionAsync();
-          setLatitude(location.coords.latitude);
-          setLongitude(location.coords.longitude);
-        } else {
-          Alert.alert("Permita o uso de GPS para o app funcionar corretamente!");
-        }
-      } catch (error) {
-        console.log("Erro ao obter localização:", error);
-      }
-    };
-
-    getLocationAsync();
-  }, []);
-
-  useEffect(() => {
-    const buscarCep = async () => {
-      try {
-        const endereco = await getCepApi(latitude, longitude);
-        console.log(endereco);
-        setEndereco(endereco);
-      } catch (error) {
-        console.log("Erro ao buscar CEP:", error);
-      }
-    };
 
     if (latitude && longitude) {
       buscarCep();
     }
-  }, [latitude, longitude]);
 
-  const buscarEndereco = async () => {
-    try {
-      const endereco = await getEndereco(cep);
-      setEndereco(endereco);
-      console.log(endereco);
-    } catch (error) {
-      console.log("Erro ao buscar endereço:", error);
-    }
-  };
+
+
 
   data = {
     cep: endereco,
@@ -65,3 +45,4 @@ const obterLocalizacao = async () => {
 };
 
 export default obterLocalizacao;
+ */

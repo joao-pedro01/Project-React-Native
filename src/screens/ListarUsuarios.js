@@ -1,25 +1,25 @@
 import { ListItem, Icon, Button } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Alert } from 'react-native';
+import { Alert, View, Text } from 'react-native';
+import { styles } from './styles/Title';
 
 const ListarUsuarios = ({ navigation }) => {
 const [usuarios, setUsuarios] = useState([]);
-const [refresh, setRefresh] = useState(false); // Variável de estado para controle de atualização
 
 useEffect(() => {
+    function getUsuarios() {
+        axios.get('http://192.168.56.1:3000/usuarios')
+        .then((res) => {
+            setUsuarios(res.data);
+        })
+        .catch((error) => {
+            Alert.alert('Erro', `Erro ao efetuar o login: ${error.message}`);
+        });
+    }
     getUsuarios();
 }, []);
 
-function getUsuarios() {
-    axios.get('http://192.168.56.1:3000/usuarios')
-    .then((res) => {
-        setUsuarios(res.data);
-    })
-    .catch((error) => {
-        Alert.alert('Erro', `Erro ao efetuar o login: ${error.message}`);
-    });
-}
 function deleteUsuario(id) {
     console.log(id);
     axios.delete(`http://192.168.56.1:3000/usuarios/${id}`).then((res) => {
@@ -35,13 +35,18 @@ function refreshPage() {
 
 return (
     <>
+    <View style={styles.container}>
+        <View style={{marginTop: 45}}>
+            <Text style={styles.title}>Usuários cadastrados</Text>
+        </View>
+    </View>
     {usuarios.map((usuario, index) => (
         <ListItem.Swipeable
         key={index}
         leftContent={(reset) => (
             <Button
             title="Info"
-            onPress={() => navigation.navigate('InfoUsuario',  usuario )}
+            onPress={() => navigation.navigate('InfoUsuario', {usuario:usuario} )}
             icon={{ name: 'info', color: 'white' }}
             buttonStyle={{ minHeight: '100%' }}
             />

@@ -1,8 +1,3 @@
-# App localização
-
-App que pega a latitude e longitude e converte em cep usando a api do google e com o cep usa a api do viacep para pegar o endereço.
-
-
 ## Membros
 
 * [**João Pedro**](https://github.com/joao-pedro01/)
@@ -24,3 +19,6 @@ Na raiz do projeto crie um arquivo .env com a chave da api do google, siga o .en
     }
     
 inicie projeto: `npx expo start`<br>
+
+
+Link API: <a href="https://github.com/joao-pedro01/Api-MongoDb">Api-MongoDb</a>
